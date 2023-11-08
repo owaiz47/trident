@@ -1151,6 +1151,7 @@ type PersistentStorageBackendConfig struct {
 	AzureConfig             *drivers.AzureNASStorageDriverConfig  `json:"azure_config,omitempty"`
 	GCPConfig               *drivers.GCPNFSStorageDriverConfig    `json:"gcp_config,omitempty"`
 	FakeStorageDriverConfig *drivers.FakeStorageDriverConfig      `json:"fake_config,omitempty"`
+	NVMeoFConfig			*drivers.NVMeoFConfig			      `json:"nvmeof_config,omitempty"`
 }
 
 func (psbc *PersistentStorageBackendConfig) GetDriverConfig() (drivers.DriverConfig, error) {
@@ -1167,6 +1168,8 @@ func (psbc *PersistentStorageBackendConfig) GetDriverConfig() (drivers.DriverCon
 		driverConfig = psbc.GCPConfig
 	case psbc.FakeStorageDriverConfig != nil:
 		driverConfig = psbc.FakeStorageDriverConfig
+	case psbc.NVMeoFConfig != nil:
+		driverConfig = psbc.NVMeoFConfig
 	default:
 		return nil, errors.New("unknown backend type")
 	}
@@ -1223,6 +1226,8 @@ func (p *BackendPersistent) MarshalConfig() (string, error) {
 		bytes, err = json.Marshal(p.Config.GCPConfig)
 	case p.Config.FakeStorageDriverConfig != nil:
 		bytes, err = json.Marshal(p.Config.FakeStorageDriverConfig)
+	case p.Config.NVMeoFConfig != nil:
+		bytes, err = json.Marshal(p.Config.NVMeoFConfig)
 	default:
 		return "", fmt.Errorf("no recognized config found for backend %s", p.Name)
 	}

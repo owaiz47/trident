@@ -54,6 +54,8 @@ func GetDriverConfigByName(driverName string) (DriverConfig, error) {
 		storageDriverConfig = &GCPNFSStorageDriverConfig{}
 	case trident.FakeStorageDriverName:
 		storageDriverConfig = &FakeStorageDriverConfig{}
+	case trident.NVMeoFDriverName:
+		storageDriverConfig = &NVMeoFConfig{}
 	default:
 		return nil, fmt.Errorf("unknown storage driver: %v", driverName)
 	}
@@ -901,4 +903,13 @@ func checkMapContainsAttributes(forbiddenMap map[string]string) []string {
 	}
 
 	return forbiddenList
+}
+
+type NVMeoFConfig struct {
+    Version           string `json:"version"`
+    TargetAddress     string `json:"targetAddress"`
+    TargetPort        string `json:"targetPort"`
+    NamespaceID       string `json:"namespaceID"`
+    TransportType     string `json:"transportType"`
+    DiscoveryProtocol string `json:"discoveryProtocol"`
 }

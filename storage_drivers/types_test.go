@@ -71,6 +71,11 @@ func TestGetDriverConfigByName(t *testing.T) {
 			expectedDriverConfig: nil,
 			errorExpected:        true,
 		},
+		{
+			driverName:           config.NVMeoFDriverName,
+			expectedDriverConfig: &NVMeoFConfig{},
+			errorExpected:        false,
+		},
 	}
 
 	for _, test := range tests {

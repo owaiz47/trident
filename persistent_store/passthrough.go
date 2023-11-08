@@ -170,6 +170,8 @@ func (c *PassthroughClient) unmarshalConfig(ctx context.Context, fileContents []
 		configType = "gcp_config"
 	case config.FakeStorageDriverName:
 		configType = "fake_config"
+	case config.NVMeoFDriverName:
+		configType = "nvme_config"
 	default:
 		return "", fmt.Errorf("unknown storage driver: %v", commonConfig.StorageDriverName)
 	}

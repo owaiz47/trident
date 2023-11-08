@@ -132,6 +132,7 @@ const (
 	AzureNASBlockStorageDriverName     = "azure-netapp-files-subvolume"
 	GCPNFSStorageDriverName            = "gcp-cvs"
 	FakeStorageDriverName              = "fake"
+	NVMeoFDriverName            	   = "nvmeof"
 
 	/* REST frontend constants */
 	MaxRESTRequestSize  = 40960
